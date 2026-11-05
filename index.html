@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media Design final projects</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#4E2A84; --purple-deep:#2C1650; --lilac:#E4DCF1; --wall:#F6F3FA; --ink:#1F1830; --muted:#625A73; --white:#fff;
+  --bar:rgba(246,243,250,.94); --card-ph:#D8CDEA;
+  font-family:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+}
+:root[data-theme="dark"]{--wall:#1A1029;--ink:#F1ECF8;--muted:#B3A8C6;--lilac:#3A2A55;--bar:rgba(26,16,41,.94);--card-ph:#3A2A55}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wall:#1A1029;--ink:#F1ECF8;--muted:#B3A8C6;--lilac:#3A2A55;--bar:rgba(26,16,41,.94);--card-ph:#3A2A55}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--wall);color:var(--ink);font-size:17px;line-height:1.45}
+a{color:inherit}
+:focus-visible{outline:3px solid #B79BE3;outline-offset:2px}
+header.top{background:var(--purple);color:#fff;padding:clamp(28px,5vw,64px) clamp(16px,4vw,48px) clamp(24px,3vw,40px)}
+h1{margin:0;font-size:clamp(3rem,11.5vw,10.5rem);line-height:.88;font-weight:800;letter-spacing:-.035em;max-width:11ch}
+.lede{margin:clamp(18px,2.5vw,28px) 0 0;max-width:38em;font-size:clamp(1.05rem,1.6vw,1.3rem);color:#E9E0F7}
+.bar{position:sticky;top:0;z-index:5;background:var(--bar);backdrop-filter:blur(10px);padding:14px clamp(16px,4vw,48px) 12px;border-bottom:1px solid var(--lilac)}
+.types{display:flex;flex-wrap:wrap;gap:2px 22px}
+.types button{all:unset;cursor:pointer;font-size:clamp(1.1rem,2vw,1.55rem);font-weight:600;letter-spacing:-.01em;color:var(--muted);padding:2px 0;border-bottom:3px solid transparent}
+.types button sup{font-size:.6em;font-weight:400;margin-left:2px}
+.types button:hover{color:var(--ink)}
+.types button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--purple)}
+:root[data-theme="dark"] .types button[aria-pressed="true"]{border-bottom-color:#B79BE3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .types button[aria-pressed="true"]{border-bottom-color:#B79BE3}}
+.types button:focus-visible{outline:3px solid #B79BE3;outline-offset:2px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.tools input,.tools select{font:inherit;font-size:16px;color:var(--ink);background:transparent;border:1px solid var(--muted);border-radius:6px;padding:6px 10px;min-height:38px}
+.tools input{flex:1 1 220px;max-width:360px}
+.tools select option{color:#1F1830}
+.count{color:var(--muted);font-size:15px;margin-left:auto}
+main{padding:clamp(16px,2.4vw,28px) clamp(16px,4vw,48px) 64px}
+.wall{display:flex;gap:clamp(12px,1.6vw,20px);align-items:flex-start}
+.col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:clamp(18px,2vw,26px)}
+.card{all:unset;display:block;cursor:pointer;width:100%}
+.card .frame{display:block;position:relative;background:var(--card-ph);overflow:hidden;line-height:0}
+.card img{display:block;width:100%;height:auto}
+.card:hover .frame{outline:3px solid var(--purple);outline-offset:2px}
+.card:focus-visible .frame{outline:3px solid #B79BE3;outline-offset:2px}
+.card .ph{display:flex;align-items:flex-end;aspect-ratio:4/3;padding:14px;background:var(--purple);color:#fff;font-size:1.3rem;line-height:1.1;font-weight:800}
+.card b{display:block;margin-top:8px;font-weight:600;font-size:1rem;line-height:1.2}
+.card small{display:block;color:var(--muted);font-size:.86rem;margin-top:1px}
+.empty{padding:48px 0;color:var(--muted);max-width:32em}
+footer{padding:0 clamp(16px,4vw,48px) 48px;color:var(--muted);font-size:.92rem;max-width:44em}
+dialog{border:0;padding:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;background:var(--purple-deep);color:#fff}
+dialog::backdrop{background:var(--purple-deep)}
+.view{display:grid;grid-template-columns:minmax(0,1fr) 320px;height:100%}
+.stage{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;padding:24px;align-items:center;min-width:0}
+.stage>*{flex:0 0 auto;max-width:calc(100% - 8px);max-height:calc(100dvh - 48px);height:auto;scroll-snap-align:center;background:#000}
+.stage img,.stage video{display:block;max-height:calc(100dvh - 48px);width:auto;height:auto}
+.stage>:only-child{margin:auto}
+.stage .none{background:transparent;color:#E9E0F7;max-width:26em;margin:auto}
+aside{padding:24px;overflow:auto;background:var(--purple);display:flex;flex-direction:column;gap:12px}
+aside h2{margin:0;font-size:1.9rem;line-height:1.05;font-weight:800;letter-spacing:-.02em}
+aside p{margin:0;color:#E9E0F7}
+.btn{display:inline-block;text-align:center;background:#fff;color:var(--purple-deep);font-weight:600;padding:10px 14px;border-radius:6px;text-decoration:none}
+.navrow{display:flex;gap:8px;margin-top:auto;padding-top:12px}
+.navrow button{font:inherit;flex:1;color:#fff;background:transparent;border:1px solid #B79BE3;border-radius:6px;padding:9px;cursor:pointer;min-height:44px}
+.close{align-self:flex-end;font:inherit;color:#fff;background:transparent;border:1px solid #B79BE3;border-radius:6px;padding:6px 12px;cursor:pointer;min-height:40px}
+@media (max-width:800px){
+  .bar{position:static}
+  .view{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}
+  .stage{padding:12px;gap:10px}
+  .stage>*,.stage img,.stage video{max-height:calc(100dvh - 300px)}
+  aside{padding:14px 16px;gap:8px}
+  aside h2{font-size:1.4rem}
+  .close{position:absolute;top:10px;right:10px;background:var(--purple-deep)}
+}
+.gate{min-height:100dvh;background:var(--purple);color:#fff;padding:clamp(28px,5vw,64px) clamp(16px,4vw,48px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:10px}
+.gate h1{margin-bottom:24px}
+.gate input{font:inherit;font-size:18px;width:min(360px,100%);padding:10px 12px;border:0;border-radius:6px}
+.gate button{font:inherit;font-weight:600;color:var(--purple-deep);background:#fff;border:0;border-radius:6px;padding:10px 16px;cursor:pointer;min-height:44px}
+.gate p{margin:0;color:#fff}
+.stage img:not([src]),.stage video:not([src]){background:#000;opacity:.5}
+</style>
+</head>
+<body>
+<form id="gateform" class="gate"><h1>Media Design final projects</h1><label for="pw">Class password</label><input id="pw" type="password" autocomplete="current-password" required autofocus><button id="gatebtn">Open the projects</button><p id="gateerr" hidden role="alert">That password didn't work. Check it and try again.</p></form>
+<div id="app" hidden>
+<header class="top">
+  <h1>Media Design final projects</h1>
+  <p class="lede">Browse what past JOUR 376 students made, from Instagram carousels to interactive sites. Pick a format to see how different classes approached it.</p>
+</header>
+<div class="bar">
+  <div class="types" id="types" role="group" aria-label="Filter by format"></div>
+  <div class="tools">
+    <input id="q" type="search" placeholder="Search by title" aria-label="Search by title">
+    <select id="term" aria-label="Filter by class"></select>
+    <span class="count" id="count" role="status"></span>
+  </div>
+</div>
+<main>
+  <div class="wall" id="wall"></div>
+  <p class="empty" id="empty" hidden>No projects match. Clear the search or choose another class.</p>
+</main>
+<footer>Shared for teaching in JOUR 376. Live projects open on their own sites and may change or stop working.</footer>
+</div>
+<dialog id="dlg" aria-labelledby="vt">
+  <div class="view">
+    <div class="stage" id="stage" tabindex="0"></div>
+    <aside>
+      <button class="close" id="close">Close</button>
+      <h2 id="vt"></h2>
+      <p id="vm"></p>
+      <a class="btn" id="vl" target="_blank" rel="noopener noreferrer">Open the live project</a>
+      <div class="navrow"><button id="prev">Previous</button><button id="next">Next</button></div>
+    </aside>
+  </div>
+</dialog>
+<script>
+const $=id=>document.getElementById(id); let P=[], KEY=null;
+const SALT="bIRvPF6LSq4nawsfJFm/sQ==", ITER=1000000;
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function dec(name){const r=await fetch('c/'+name);if(!r.ok)throw new Error('missing');const b=await r.arrayBuffer();return crypto.subtle.decrypt({name:'AES-GCM',iv:new Uint8Array(b,0,12)},KEY,new Uint8Array(b,12));}
+const urls=new Map();
+async function blobUrl(h,m){if(!urls.has(h))urls.set(h,URL.createObjectURL(new Blob([await dec(h)],{type:m})));return urls.get(h)}
+const queue=[];let busy=0;
+function pump(){while(busy<6&&queue.length){const[el]=queue.shift();busy++;blobUrl(el.dataset.h,el.dataset.m).then(u=>{el.src=u;el.removeAttribute('data-h');el.parentElement?.classList.remove('loading')}).catch(()=>{}).finally(()=>{busy--;pump()})}}
+const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting){io.unobserve(e.target);queue.push([e.target]);pump()}},{rootMargin:'400px'});
+function hydrate(root){root.querySelectorAll('[data-h]').forEach(el=>io.observe(el))}
+async function unlock(pw){
+  const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  KEY=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(SALT),iterations:ITER,hash:'SHA-256'},k,{name:'AES-GCM',length:256},true,['decrypt']);
+  await start();
+  try{sessionStorage.setItem('k',btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.exportKey('raw',KEY)))))}catch{}
+}
+async function start(){P=JSON.parse(new TextDecoder().decode(await dec('data')));$('gateform').hidden=true;$('app').hidden=false;buildFilters();render();
+  if(location.hash){const i=shown.findIndex(p=>p.id===location.hash.slice(1));if(i>=0)openAt(i)}}
+$('gateform').onsubmit=async e=>{e.preventDefault();const b=$('gatebtn');b.disabled=true;b.textContent='Checking…';$('gateerr').hidden=true;
+  try{await unlock($('pw').value.trim())}catch{$('gateerr').hidden=false;b.disabled=false;b.textContent='Open the projects';$('pw').select()}};
+(async()=>{try{const s=sessionStorage.getItem('k');if(s){KEY=await crypto.subtle.importKey('raw',b64(s),'AES-GCM',true,['decrypt']);await start()}}catch{try{sessionStorage.removeItem('k')}catch{}}})();
+const TYPES=[['all','All'],['posts','Instagram posts and carousels'],['stories','Instagram stories'],['reels','Reels and TikToks'],['sites','Interactive sites and apps'],['prototypes','Clickable prototypes'],['video','Video'],['editorial','Editorial and presentations']];
+const TL=Object.fromEntries(TYPES);
+const state={type:'all',term:'',q:''}; let shown=[],cur=-1,lastCols=0;
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function buildFilters(){
+  $('types').innerHTML=TYPES.map(([k,l])=>{const n=k==='all'?P.length:P.filter(p=>p.type===k).length;return `<button data-k="${k}" aria-pressed="${k==='all'}">${l}<sup>${n}</sup></button>`}).join('');
+  $('types').onclick=e=>{const b=e.target.closest('button');if(!b)return;state.type=b.dataset.k;[...$('types').children].forEach(x=>x.setAttribute('aria-pressed',x===b));render()};
+  const terms=[...new Set(P.map(p=>p.term))];
+  $('term').innerHTML='<option value="">All classes</option>'+terms.map(t=>`<option>${t}</option>`).join('');
+  $('term').onchange=e=>{state.term=e.target.value;render()};
+  $('q').oninput=e=>{state.q=e.target.value.toLowerCase();render()};
+}
+function colsFor(){const w=innerWidth;return w<520?2:w<860?3:w<1240?4:w<1700?5:6}
+function render(){
+  shown=P.filter(p=>(state.type==='all'||p.type===state.type)&&(!state.term||p.term===state.term)&&(!state.q||p.title.toLowerCase().includes(state.q)));
+  const n=colsFor(); lastCols=n; const cols=Array.from({length:n},()=>({h:0,html:''}));
+  shown.forEach((p,i)=>{
+    const c=cols.reduce((a,b)=>b.h<a.h?b:a), ar=p.ar||.8;
+    c.h+=1/ar+.3;
+    const inner=p.thumb?`<img data-h="${p.thumb}" data-m="image/jpeg" alt="" width="640" height="${Math.round(640/ar)}">`:`<span class="ph">${esc(p.title)}</span>`;
+    c.html+=`<button class="card" data-i="${i}"><span class="frame">${inner}</span><b>${esc(p.title)}</b><small>${state.type==='all'?TL[p.type]+', ':''}${p.term}</small></button>`;
+  });
+  $('wall').innerHTML=cols.map(c=>`<div class="col">${c.html}</div>`).join('');hydrate($('wall'));
+  $('count').textContent=`${shown.length} project${shown.length===1?'':'s'}`;
+  $('empty').hidden=shown.length>0;
+}
+$('wall').onclick=e=>{const c=e.target.closest('.card');if(c)openAt(+c.dataset.i)};
+function openAt(i){
+  cur=i; const p=shown[i];
+  $('vt').textContent=p.title; $('vm').textContent=`${TL[p.type]}, ${p.term}`;
+  $('stage').innerHTML=p.media.map((m,j)=>m.t==='vid'
+    ?`<video controls playsinline width="480" height="640" data-h="${m.f}" data-m="${m.m}"></video>`
+    :`<img data-h="${m.f}" data-m="${m.m}" alt="${esc(p.title)}, image ${j+1} of ${p.media.length}" width="480" height="640">`).join('')||'<p class="none">This project lives on its own site. Use the button to open it.</p>';
+  $('stage').scrollLeft=0;hydrate($('stage'));
+  $('vl').hidden=!p.link; if(p.link)$('vl').href=p.link;
+  $('prev').disabled=i===0; $('next').disabled=i===shown.length-1;
+  if(!$('dlg').open)$('dlg').showModal();
+  history.replaceState(null,'','#'+p.id);
+}
+function closeView(){$('stage').innerHTML='';$('dlg').close();history.replaceState(null,'',location.pathname)}
+$('close').onclick=closeView;
+$('dlg').addEventListener('cancel',e=>{e.preventDefault();closeView()});
+$('prev').onclick=()=>cur>0&&openAt(cur-1);
+$('next').onclick=()=>cur<shown.length-1&&openAt(cur+1);
+addEventListener('keydown',e=>{if(!$('dlg').open)return;if(e.key==='ArrowRight'&&e.shiftKey)$('next').click();if(e.key==='ArrowLeft'&&e.shiftKey)$('prev').click()});
+addEventListener('resize',()=>{if(colsFor()!==lastCols)render()});
+</script>
+</body>
+</html>
