@@ -134,7 +134,7 @@ async function unlock(pw){
   await start();
   try{sessionStorage.setItem('k',btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.exportKey('raw',KEY)))))}catch{}
 }
-async function start(){P=JSON.parse(new TextDecoder().decode(await dec('data')));$('gateform').hidden=true;$('app').hidden=false;buildFilters();render();
+async function start(){P=JSON.parse(new TextDecoder().decode(await dec('df9785e1c4ca58da9')));$('gateform').hidden=true;$('app').hidden=false;buildFilters();render();
   if(location.hash){const i=shown.findIndex(p=>p.id===location.hash.slice(1));if(i>=0)openAt(i)}}
 $('gateform').onsubmit=async e=>{e.preventDefault();const b=$('gatebtn');b.disabled=true;b.textContent='Checking…';$('gateerr').hidden=true;
   try{await unlock($('pw').value.trim().toLowerCase())}catch{$('gateerr').hidden=false;b.disabled=false;b.textContent='Open the projects';$('pw').select()}};
